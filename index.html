@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>India Trip Board</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="header-actions">
+        <div class="view-toggle" role="group" aria-label="Preview layout">
+          <button id="phoneView" type="button" aria-pressed="false">Phone</button>
+          <button id="desktopView" type="button" aria-pressed="false">Desktop</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel place-bank" aria-labelledby="placeBankTitle">
+        <div class="panel-head">
+          <div class="title-row">
+            <h2 id="placeBankTitle">All places</h2>
+            <button id="planToggle" type="button" class="ghost compact-toggle" aria-expanded="false">
+              Planed
+            </button>
+          </div>
+          <p id="resultCount" class="count"></p>
+        </div>
+
+        <section id="planPanel" class="inline-plan" aria-labelledby="planTitle" hidden>
+          <h2 id="planTitle">Planed</h2>
+          <div id="dayPlan" class="day-plan"></div>
+        </section>
+
+        <div class="controls">
+          <label class="search-control">
+            Search
+            <input id="searchInput" type="search" placeholder="e.g. museum, cafe, Jaipur" />
+          </label>
+          <div class="filter-menu">
+            <span class="filter-label">City</span>
+            <button id="cityFilter" class="filter-trigger" type="button" aria-expanded="false">
+              All cities
+            </button>
+            <div id="cityOptions" class="filter-options" hidden></div>
+          </div>
+          <div class="filter-menu">
+            <span class="filter-label">Category</span>
+            <button id="categoryFilter" class="filter-trigger" type="button" aria-expanded="false">
+              All categories
+            </button>
+            <div id="categoryOptions" class="filter-options" hidden></div>
+          </div>
+          <div class="filter-menu">
+            <span class="filter-label">Status</span>
+            <button id="statusFilter" class="filter-trigger" type="button" aria-expanded="false">
+              All
+            </button>
+            <div id="statusOptions" class="filter-options" hidden></div>
+          </div>
+        </div>
+
+        <div id="placeList" class="place-list"></div>
+      </section>
+    </main>
+
+    <section id="detailShell" class="detail-shell" aria-hidden="true">
+      <div id="detailBackdrop" class="detail-backdrop"></div>
+      <aside class="detail-panel" aria-labelledby="detailTitle">
+        <div class="drawer-handle" aria-hidden="true"></div>
+        <div class="detail-head">
+          <div>
+            <p id="detailMeta" class="meta"></p>
+            <h2 id="detailTitle"></h2>
+          </div>
+          <button id="detailClose" class="icon-close" type="button" aria-label="Close details">×</button>
+        </div>
+        <div id="detailHero" class="detail-hero"></div>
+        <p id="detailNotes" class="detail-notes"></p>
+        <dl class="detail-facts">
+          <div>
+            <dt>Good for</dt>
+            <dd id="detailPriority"></dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd id="detailStatus"></dd>
+          </div>
+        </dl>
+        <div class="detail-actions">
+          <button id="detailVisited" type="button"></button>
+          <a id="detailMap" class="detail-map" target="_blank" rel="noreferrer">Open in Google Maps</a>
+        </div>
+      </aside>
+    </section>
+
+    <template id="placeTemplate">
+      <article class="place-card">
+        <div class="place-main">
+          <div>
+            <p class="meta"></p>
+            <h3></h3>
+          </div>
+          <span class="badge"></span>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
