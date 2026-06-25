@@ -25,5 +25,4 @@ Then open <http://localhost:8080>.
 This is intentionally backend-free and GitHub-Pages-friendly. Browser state is local
 to each person.
 
-Automatic live two-person sync will need a small backend later, e.g. Firebase,
-Supabase, or a tiny authenticated API.
+Automatic live two-person sync is not yet planned.
