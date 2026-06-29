@@ -20,7 +20,11 @@ const wikiOverrides = {
     ],
     links: [
       {
-        label: "More context: Purana Qila",
+        label: "Google Arts & Culture: Purana Qila",
+        url: "https://artsandculture.google.com/story/purana-qila-indian-national-trust-for-art-and-cultural-heritage/lwVRxSuA9R0A8A?hl=en"
+      },
+      {
+        label: "Historical photo/context page",
         url: "https://digitalcollections.lib.washington.edu/digital/collection/ic/id/6430/"
       }
     ]
@@ -55,6 +59,10 @@ const wikiOverrides = {
     ],
     links: [
       {
+        label: "Google Arts & Culture: Red Fort",
+        url: "https://artsandculture.google.com/story/red-fort-indian-national-trust-for-art-and-cultural-heritage/DAVRBY9EVwsA8A?hl=en"
+      },
+      {
         label: "Official ASI page",
         url: "https://asi.nic.in/pages/WorldHeritageRedFort"
       }
@@ -76,6 +84,18 @@ const wikiOverrides = {
       "Nearby: Mehrauli Archaeological Park, cafes/restaurants around Mehrauli/Saket side."
     ],
     links: [
+      {
+        label: "Google Arts & Culture: Qutb Complex",
+        url: "https://artsandculture.google.com/story/qutb-complex-indian-national-trust-for-art-and-cultural-heritage/6gVRxQeDgg8A8A?hl=en"
+      },
+      {
+        label: "Google Arts & Culture: Qutub Minar",
+        url: "https://artsandculture.google.com/story/qutub-minar-the-world-s-tallest-brick-minaret-incredibleindia/JwVxNHO3C07RIA?hl=en"
+      },
+      {
+        label: "Atlas Obscura: Iron Pillar inside Qutb Complex",
+        url: "https://www.atlasobscura.com/places/iron-pillar-delhi"
+      },
       {
         label: "Official ASI page",
         url: "https://asi.nic.in/pages/WorldHeritageQutbMinar"
@@ -155,7 +175,17 @@ const wikiOverrides = {
       "The contrast between joggers, picnics, and medieval masonry is the point."
     ],
     see: ["Muhammad Shah's Tomb.", "Sikandar Lodi's Tomb.", "Athpula bridge and garden paths."],
-    useful: ["Pairs well with Lodhi Art District, Khan Market, Gandhi Smriti, and Cafe De Flora."]
+    useful: ["Pairs well with Lodhi Art District, Khan Market, Gandhi Smriti, and Cafe De Flora."],
+    links: [
+      {
+        label: "Google Arts & Culture: Lodi Garden Monuments",
+        url: "https://artsandculture.google.com/story/4wVRRUyWORMA8A"
+      },
+      {
+        label: "Long-form blog: Delhi Lodi Garden",
+        url: "https://ramaarya.blog/2022/06/13/delhi-lodi-garden/"
+      }
+    ]
   },
   "gandhi-smriti": {
     intro: [
@@ -509,7 +539,7 @@ function renderWikiPage() {
   renderList("#wikiNotice", override.notice || category.notice);
   renderList("#wikiSee", override.see || category.see);
   renderList("#wikiUseful", override.useful || category.useful);
-  renderLinks(override.links || []);
+  renderLinks(getReadMoreLinks(place, override));
 }
 
 function renderMissingPage() {
@@ -532,6 +562,17 @@ function buildIntro(place, override, category) {
 
   const base = placeDescriptions[place.id] || place.notes || "Useful stop for this trip.";
   return [base, category.introAdd];
+}
+
+function getReadMoreLinks(place, override) {
+  if (override.links?.length) return override.links;
+
+  return [
+    {
+      label: "Find on Wikipedia",
+      url: `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(`${place.name} ${place.city}`)}`
+    }
+  ];
 }
 
 function renderParagraphs(selector, paragraphs) {
