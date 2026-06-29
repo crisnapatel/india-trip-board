@@ -17,6 +17,12 @@ const wikiOverrides = {
     useful: [
       "Pairs naturally with National Zoological Park, Purana Qila Lake boating, or India Gate/Pragati Maidan side.",
       "Boating and light-show operations can change; verify same-day before planning around them."
+    ],
+    links: [
+      {
+        label: "More context: Purana Qila",
+        url: "https://digitalcollections.lib.washington.edu/digital/collection/ic/id/6430/"
+      }
     ]
   },
   "purana-qila-boating": {
@@ -46,6 +52,12 @@ const wikiOverrides = {
     useful: [
       "ASI lists Red Fort opening hours as sunrise to 9:00 PM.",
       "Pairs with Chandni Chowk, Jama Masjid, Dariba Kalan, or a focused Old Delhi food/market walk."
+    ],
+    links: [
+      {
+        label: "Official ASI page",
+        url: "https://asi.nic.in/pages/WorldHeritageRedFort"
+      }
     ]
   },
   "qutub-minar": {
@@ -62,6 +74,12 @@ const wikiOverrides = {
     useful: [
       "ASI lists Qutub Minar opening hours as sunrise to 8:00 PM.",
       "Nearby: Mehrauli Archaeological Park, cafes/restaurants around Mehrauli/Saket side."
+    ],
+    links: [
+      {
+        label: "Official ASI page",
+        url: "https://asi.nic.in/pages/WorldHeritageQutbMinar"
+      }
     ]
   },
   "humayun-tomb": {
@@ -79,6 +97,38 @@ const wikiOverrides = {
       "Delhi Tourism lists Humayun's Tomb as open daily from sunrise to sunset.",
       "The newer site museum lists 10:00 AM to 9:00 PM, last entry 8:00 PM, closed Monday and national holidays.",
       "Nearby: Nizamuddin, Sunder Nursery, Lodhi Garden side."
+    ],
+    links: [
+      {
+        label: "Delhi Tourism page",
+        url: "https://delhitourism.gov.in/tourist_place/humayun_tomb.html"
+      }
+    ]
+  },
+  "lodhi-art": {
+    intro: [
+      "Lodhi Art District is an open-air street-art area across Lodhi Colony. It is useful because the murals turn a residential neighbourhood into a public gallery: architecture, walls, lanes, artists, local stories, and social themes all sit together.",
+      "St+art India and invited Indian/international artists have shaped the area since 2015, making it a strong photoshoot stop but also a good place to read public art as commentary rather than decoration."
+    ],
+    notice: [
+      "Look for murals that use the building's arches, windows, and shadows as part of the artwork.",
+      "Notice themes beyond colour: gender, migration, climate, mythology, city life, and local community.",
+      "Some works are site-specific, so step back and see how the mural fits the whole wall and street."
+    ],
+    see: [
+      "DAKU's shadow/time-based typographic work if the sun angle is right.",
+      "Murals around Khanna Market and the main Lodhi Colony blocks.",
+      "Wide wall shots plus close-up details of texture, stencil, lettering, and scale."
+    ],
+    useful: [
+      "Pairs naturally with Lodhi Garden, Khan Market, Gandhi Smriti, or Cafe De Flora.",
+      "Best treated as a walking/photo route rather than a single pinned monument."
+    ],
+    links: [
+      {
+        label: "Google Arts & Culture: Lodhi Art District",
+        url: "https://artsandculture.google.com/story/lodhi-art-district-st-art-india/EAWh787tb1GHJA?hl=en"
+      }
     ]
   },
   "india-gate": {
@@ -322,6 +372,12 @@ const wikiOverrides = {
     useful: [
       "Near Amber side; pairs naturally with Amber Palace and Panna Meena ka Kund.",
       "Current official note: closed for summer and reopening on 15 July 2026, so it will not fit the 4-5 July Jaipur weekend unless this changes."
+    ],
+    links: [
+      {
+        label: "Official Anokhi page",
+        url: "https://www.anokhi.com/jaipur-2/"
+      }
     ]
   }
 };
@@ -453,6 +509,7 @@ function renderWikiPage() {
   renderList("#wikiNotice", override.notice || category.notice);
   renderList("#wikiSee", override.see || category.see);
   renderList("#wikiUseful", override.useful || category.useful);
+  renderLinks(override.links || []);
 }
 
 function renderMissingPage() {
@@ -466,6 +523,7 @@ function renderMissingPage() {
   renderList("#wikiNotice", ["The link may be old, mistyped, or from a removed place."]);
   renderList("#wikiSee", ["Open a place card's ⓘ icon again."]);
   renderList("#wikiUseful", ["Use the Back link to return to the current list."]);
+  renderLinks([]);
 }
 
 function buildIntro(place, override, category) {
@@ -493,6 +551,22 @@ function renderList(selector, items) {
     const li = document.createElement("li");
     li.textContent = item;
     list.append(li);
+  }
+}
+
+function renderLinks(links) {
+  const section = document.querySelector("#wikiLinksSection");
+  const container = document.querySelector("#wikiLinks");
+  container.replaceChildren();
+  section.hidden = !links.length;
+
+  for (const link of links) {
+    const anchor = document.createElement("a");
+    anchor.href = link.url;
+    anchor.target = "_blank";
+    anchor.rel = "noreferrer";
+    anchor.textContent = link.label;
+    container.append(anchor);
   }
 }
 
