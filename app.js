@@ -22,6 +22,7 @@ const places = [
   { id: "lodhi-garden", name: "Lodhi Garden", city: "Delhi", category: "Garden", priority: "high", notes: "Relaxed fallback instead of Red Fort; pairs with Cafe De Flora and Lodhi Art District." },
   { id: "lodhi-art", name: "Lodhi Art District", city: "Delhi", category: "Photo spot", priority: "high", notes: "30 June street-art/photoshoot idea." },
   { id: "national-zoo", name: "National Zoological Park", city: "Delhi", category: "Outdoor", priority: "medium", notes: "Open Mondays, closed Fridays; good only if heat/rain is manageable." },
+  { id: "purana-qila", name: "Purana Qila", city: "Delhi", category: "Monument", priority: "medium", notes: "Fort complex beside the zoo; pairs well with boating or a short history stop." },
   { id: "purana-qila-boating", name: "Purana Qila Lake boating", city: "Delhi", category: "Outdoor", priority: "medium", notes: "Adjacent to zoo; reconfirm same-day operation." },
 
   // Delhi - temples/religious sites
@@ -82,6 +83,7 @@ const placeDescriptions = {
   "lodhi-garden": "Green, relaxed park with tombs, walking paths, and photo corners. Strong fallback when the plan needs something easy and low-cost.",
   "lodhi-art": "Open-air street art district with murals spread across Lodhi Colony. Best for photos, walking, and a less monument-heavy Delhi experience.",
   "national-zoo": "Large outdoor zoo beside Purana Qila. Best only if weather is manageable; otherwise it can become tiring in heat or rain.",
+  "purana-qila": "Old Fort complex associated with Humayun and Sher Shah Suri. Good for a short history stop, gates, old walls, and a calmer monument experience than Red Fort.",
   "purana-qila-boating": "Boating option beside Purana Qila. Good as a light add-on near the zoo, but operation should be checked same day.",
 
   "birla-mandir": "Lakshmi Narayan temple known for its central location, devotional atmosphere, and bright temple architecture.",
@@ -183,7 +185,9 @@ const els = {
   detailMap: document.querySelector("#detailMap")
 };
 
-init();
+if (els.placeList) {
+  init();
+}
 
 function init() {
   hydrateFromUrl();
@@ -364,6 +368,10 @@ function renderPlaceCard(place) {
   card.classList.toggle("visited", isVisited);
   card.querySelector(".meta").textContent = `${place.city} · ${place.category}`;
   card.querySelector("h3").textContent = place.name;
+
+  const wikiLink = card.querySelector(".wiki-link");
+  wikiLink.href = `./wiki.html?id=${encodeURIComponent(place.id)}`;
+  wikiLink.addEventListener("click", (event) => event.stopPropagation());
 
   const badge = card.querySelector(".badge");
   badge.hidden = !isVisited;

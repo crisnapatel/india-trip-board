@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Place wiki</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="wiki-body">
+    <main class="wiki-shell">
+      <nav class="wiki-nav">
+        <a href="./index.html" class="back-link">← Back</a>
+        <a id="wikiMap" class="wiki-map" target="_blank" rel="noreferrer">Maps</a>
+      </nav>
+
+      <article id="wikiPage" class="wiki-page">
+        <div class="wiki-hero">
+          <div id="wikiIcon" class="wiki-icon"></div>
+          <div>
+            <p id="wikiMeta" class="meta"></p>
+            <h1 id="wikiTitle"></h1>
+          </div>
+        </div>
+
+        <p id="wikiIntro" class="wiki-intro"></p>
+
+        <section class="wiki-section">
+          <h2>Quick context</h2>
+          <ul id="wikiContext"></ul>
+        </section>
+
+        <section class="wiki-section">
+          <h2>What to notice</h2>
+          <ul id="wikiNotice"></ul>
+        </section>
+
+        <section class="wiki-section">
+          <h2 id="wikiTryTitle">Things to do / try</h2>
+          <ul id="wikiTry"></ul>
+        </section>
+
+        <section class="wiki-section wiki-note">
+          <h2>Planning note</h2>
+          <p id="wikiPlanning"></p>
+        </section>
+      </article>
+    </main>
+
+    <script src="./app.js"></script>
+    <script src="./wiki.js"></script>
+  </body>
+</html>
